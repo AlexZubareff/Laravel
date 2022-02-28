@@ -17,4 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/welcome', fn() => "Welcome to News Site!");
+Route::get('/info', fn() => "Here will be information about project.");
+Route::get('/news', fn() => "Here will be some news.");
