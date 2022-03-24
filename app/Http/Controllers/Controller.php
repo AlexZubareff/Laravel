@@ -38,7 +38,7 @@ class Controller extends BaseController
                 'author' => $faker->userName(),
                 'image' => $faker->imageUrl(250,150),
                 'status' => $statusList[mt_rand(0,2)],
-                'description' => $faker->text(100)
+                'description' => "<strong>" . $faker->text(100) . "</strong>"
             ];
         }
         return $data;
@@ -54,6 +54,7 @@ class Controller extends BaseController
                 'categoryName' => $faker->jobTitle()
             ];
         }
+
         return $data;
     }
 }

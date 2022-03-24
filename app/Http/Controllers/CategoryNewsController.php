@@ -16,8 +16,26 @@ class CategoryNewsController extends Controller
 
     public function showCategoryNews(int $categoryId)
     {
-        return view('news.categoryNews', [
-            'news' => $this->getNews($categoryId)
+        $categoryNews = $this->getNews();
+        $categoryNameArray = $this->getCategoryNews();
+
+        foreach ($categoryNameArray as $categoryNameItem){
+            foreach ($categoryNameItem as $item){
+                if($item == $categoryId){
+                    $categoryName = $categoryNameItem['categoryName'];
+                }
+            }
+        }
+
+        $categoryNewsArray = [];
+        foreach ($categoryNews as $item){
+            if ($item['categoryId'] == $categoryId) {
+                $categoryNewsArray[] = $item;
+            }
+        }
+            return view('news.categoryNews', [
+            'categoryNewsList' =>$categoryNewsArray,
+            'categoryName'=>$categoryName
         ]);
     }
 
