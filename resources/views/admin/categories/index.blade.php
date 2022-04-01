@@ -9,8 +9,5 @@
             </div>
         </div>
     </div>
-    <x-alert type="danger" message="Это сообщение об ошибке"/>
-    <x-alert type="success" message="Это сообщение об успехе"/>
-    <x-alert type="info" message="Это выводит информацию"/>
 
 @endsection

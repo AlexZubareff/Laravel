@@ -19,13 +19,7 @@ class CategoryNewsController extends Controller
         $categoryNews = $this->getNews();
         $categoryNameArray = $this->getCategoryNews();
 
-        foreach ($categoryNameArray as $categoryNameItem){
-            foreach ($categoryNameItem as $item){
-                if($item == $categoryId){
-                    $categoryName = $categoryNameItem['categoryName'];
-                }
-            }
-        }
+        $categoryName = $categoryNameArray[array_search($categoryId,$categoryNameArray)]['categoryName'];
 
         $categoryNewsArray = [];
         foreach ($categoryNews as $item){
