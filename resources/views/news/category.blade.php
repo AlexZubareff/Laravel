@@ -10,8 +10,8 @@
 @section('content')
     @forelse ($categoryList as $category)
         <div class="category">
-            <p><em>{{ $category['categoryId'] }}</em>.
-                <a href="{{ route('categoryNews', ['categoryId' => $category['categoryId']]) }}">{{ $category['categoryName'] }}</em></a>
+            <p><em>{{ $category->id }}</em>.
+                <a href="{{ route('categoryNews', ['categoryId' => $category->id]) }}">{{ $category->title }}</em></a>
             </p>
         </div>
     @empty

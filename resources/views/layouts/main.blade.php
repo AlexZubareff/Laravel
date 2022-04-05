@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Сайт Новостей</title>
+    <title>@section('title')Список новостей @show</title>
 
 
     <!-- Bootstrap core CSS -->
@@ -41,7 +41,7 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-
+            @yield('sourceContent')
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 @yield('content')
                 @yield('comment')

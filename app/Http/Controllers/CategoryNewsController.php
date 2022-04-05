@@ -2,34 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class CategoryNewsController extends Controller
 {
     public function showCategoryList()
     {
-        $categoryNews = $this->getCategoryNews();
+        $categoryNews = app(Category::class);
         return view('news.category',[
-            'categoryList'=>$categoryNews
+            'categoryList'=>$categoryNews->getCategories()
         ]);
     }
 
-    public function showCategoryNews(int $categoryId)
+    public function showCategoryNews(int $id)
     {
-        $categoryNews = $this->getNews();
-        $categoryNameArray = $this->getCategoryNews();
 
-        $categoryName = $categoryNameArray[array_search($categoryId,$categoryNameArray)]['categoryName'];
-
-        $categoryNewsArray = [];
-        foreach ($categoryNews as $item){
-            if ($item['categoryId'] == $categoryId) {
-                $categoryNewsArray[] = $item;
-            }
-        }
+        $news = app(News::class);
+        $categoryName = app(Category::class);
             return view('news.categoryNews', [
-            'categoryNewsList' =>$categoryNewsArray,
-            'categoryName'=>$categoryName
+            'categoryNewsList' =>$news->getNewsByCategoryId($id),
+            'categoryName'=>$categoryName->getCategoryById($id)
         ]);
     }
 
