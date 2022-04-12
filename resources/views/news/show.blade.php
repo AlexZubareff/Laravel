@@ -6,7 +6,7 @@
         </div>
     </div>
 @endsection
-
+@include('inc.messages')
 @section('content')
 <div class="news">
     <img src="{{ $news->image }}">
@@ -18,19 +18,23 @@
 </div>
 @endsection
 <br><br>
+
 @section('comment')
     <div class="row" >
         <h4>Оставьте свой комментарий</h4>
         <form  method="post" action="{{ route('userComment') }}">
             @csrf
             <div class="form-group">
+                <input type="hidden" class="form-control" name="news_id" id="news_id" value="{{ $news->id }} ">
+            </div>
+            <div class="form-group">
                 <label for="name">Имя</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
             </div>
             <br>
             <div class="form-group">
-                <label for="comment">Комментарий</label>
-                <textarea type="text" class="form-control" name="comment" id="comment">{!! old('comment') !!}</textarea>
+                <label for="description">Комментарий</label>
+                <textarea type="text" class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Добавить комментарий</button>

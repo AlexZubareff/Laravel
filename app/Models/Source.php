@@ -10,16 +10,8 @@ class Source extends Model
 {
     use HasFactory;
     protected $table = 'sources';
-    public function getSources(): array
-    {
-        return DB::table($this->table)
-            ->get()
-            ->toArray();
-    }
-
-    public function getSourcesById(int $id): mixed
-    {
-        return DB::table($this->table)->find($id);
-    }
+    protected $fillable = [
+        'name', 'url', 'description'
+    ];
 
 }

@@ -1,12 +1,7 @@
 @extends('layouts.main')
 @section('header')
-    <div>Имя: {{ $name }}</div>
-    <div>Комментарий: {{ $comment }}</div>
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">комментарий добавлен в файл data.txt расположенный в папке storage/app/public</h1>
-        </div>
-    </div>
+
+    @include('inc.messages')
 {{--
     <br><br>
     <div class="row" >

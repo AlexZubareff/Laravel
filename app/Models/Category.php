@@ -4,23 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
     use HasFactory;
     protected $table = 'categories';
+    protected $fillable = [
+      'title', 'description'
+    ];
 
-    public function getCategories(): array
+    protected $casts = [
+      'is_active'=> 'boolean'
+    ];
+
+    public function scopeActive($query)
     {
-       return DB::table($this->table)
-           ->select("id","title", "description")
-           ->get()
-           ->toArray();
+        return $query->where('is_active', true);
     }
 
-    public function getCategoryById(int $id): mixed
+    //Relations
+    public function news(): HasMany
     {
-        return DB::table($this->table)->find($id);
+        return $this->hasMany(News::class, 'category_id', 'id');
     }
 }

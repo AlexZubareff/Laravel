@@ -8,8 +8,10 @@ use \App\Http\Controllers\CommentController as UserCommentController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\SourceController as AdminSourceController;
 use App\Http\Controllers\SourceController as SourceController;
 use App\Http\Controllers\CategoryNewsController;
+use \App\Http\Controllers\Admin\NewsCommentController as AdminNewsCommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,14 +33,14 @@ Route::get('/welcome', function () {
 
 Route::get('/news', [NewsController::class, 'index'])
     ->name('news');
-Route::get('/news/{id}', [NewsController::class, 'show'])
-    ->where('id', '\d+')
+Route::get('/news/{news}', [NewsController::class, 'show'])
+/*    ->where('id', '\d+')*/
     ->name('news.show');
 Route::get('/category', [CategoryNewsController::class, 'showCategoryList'])
     ->name('categoryList');
 Route::get('/source', [SourceController::class,'index'])
     ->name('source');
-Route::get('/category/{categoryId}', [CategoryNewsController::class, 'showCategoryNews'])
+Route::get('/category/{category}', [CategoryNewsController::class, 'showCategoryNews'])
     ->name('categoryNews');
 Route::post('/news/comment', [UserCommentController::class, 'addComment'])
     ->name('userComment');
@@ -54,4 +56,6 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.'], function (){
         ->name('index');
     Route::resource('categories', AdminCategoryController::class);
     Route::resource('news', AdminNewsController::class);
+    Route::resource('comments', AdminNewsCommentController::class);
+    Route::resource('sources', AdminSourceController::class);
 });

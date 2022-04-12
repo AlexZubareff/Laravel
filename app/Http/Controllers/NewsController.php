@@ -13,18 +13,17 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news = app(News::class);
 
         return view('news.index', [
-            'newsList' => $news->getNews()
+            'newsList' => News::paginate(6)
         ]);
     }
 
-    public function show(int $id)
+
+    public function show(News $news)
     {
-        $news = app(News::class);
             return view('news.show',[
-            'news' => $news->getNewsById($id)
+            'news' => $news
         ]);
     }
 

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Source;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-
-class CategoryController extends Controller
+class SourceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index', [
-            'categories' => Category::with('news')->paginate(5)
+        return view('admin.sources.index', [
+            'sourceList' => Source::paginate(5)
         ]);
+
     }
 
     /**
@@ -29,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.sources.create');
     }
 
     /**
@@ -38,15 +37,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        $data = $request->only(['title', 'description']);
-        $category = Category::create($data);
-        if($category){
-            return redirect()->route('admin.categories.index')
-                ->with('success', 'Запись успешно добавлена');
+        $data = $request->only(['name', 'url', 'description']);
+        $source = Source::create($data);
+        if($source){
+            return redirect()->route('admin.sources.index')
+                ->with('success', 'Источник успешно добавлен');
         }
-        return back()->with('error', 'Не удалось добавить запись');
+        return back()->with('error', 'Не удалось добавить источник');
     }
 
     /**
@@ -63,33 +62,33 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Category $category
+     * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function edit(Category $category)
+    public function edit(Source $source)
     {
-        return view('admin.categories.edit',[
-            'category'=>$category
+        return view('admin.sources.edit', [
+            'source'=>$source
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Category $category
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Source $source)
     {
-        $status = $category->fill($request->only(['title', 'description']))
+        $status = $source->fill($request->only(['name', 'url', 'description']))
             ->save();
 
         if($status){
-            return redirect()->route('admin.categories.index')
-                ->with('success', 'Запись успешно обновлена');
+            return redirect()->route('admin.sources.index')
+                ->with('success', 'Источник успешно обновлен');
         }
-        return back()->with('error', 'Не удалось обновить запись');
+        return back()->with('error', 'Не удалось обновить источник');
     }
 
     /**

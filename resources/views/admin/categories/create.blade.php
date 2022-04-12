@@ -7,6 +7,7 @@
         </div>
     </div>
     <div class="row">
+        @include('inc.messages')
         <form  method="post" action="{{ route('admin.categories.store') }}">
             @csrf
             <div class="form-group">
@@ -16,7 +17,7 @@
             <br>
             <div class="form-group">
                 <label for="description">Описание категории</label>
-                <textarea type="text" class="form-control" name="description" id="description">{!! old('description') !!}"</textarea>
+                <textarea type="text" class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Добавить категорию</button>

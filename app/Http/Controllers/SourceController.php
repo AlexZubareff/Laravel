@@ -9,10 +9,8 @@ class SourceController extends Controller
 {
     public function index()
     {
-        $source = app(Source::class);
-
         return view('sources.index', [
-            'sourceList' => $source->getSources()
+            'sourceList' => Source::paginate(5)
         ]);
     }
 }

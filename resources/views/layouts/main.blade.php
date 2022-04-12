@@ -47,7 +47,7 @@
                 @yield('comment')
         </div>
     </div>
-
+    @yield('pagination')
 </main>
 
 

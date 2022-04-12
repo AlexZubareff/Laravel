@@ -16,14 +16,14 @@
 
             <div class="card-body">
                 <strong>
-                    <a href="{{route('news.show', ['id' => $news->id])}}">
+                    <a href="{{route('news.show', $news)}}">
                         {{$news->title}}
                     </a>
                 </strong>
                 <p class="card-text">{!! $news->description !!}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{{route('news.show', ['id' => $news->id])}}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                        <a href="{{route('news.show', $news)}}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                     </div>
                     <small class="text-muted">Статус: <em>{{ $news->status }}</em></small>
                     <small class="text-muted">Автор: <em>{{ $news->author }}</em></small>
@@ -32,8 +32,13 @@
             </div>
         </div>
     </div>
+
     @empty
         <h2>Новостей нет</h2>
     @endforelse
 
+@endsection
+@section('pagination')
+    <br>
+    <div class="container"> {{ $newsList->links() }}</div>
 @endsection

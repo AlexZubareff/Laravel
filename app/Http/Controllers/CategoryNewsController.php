@@ -10,20 +10,21 @@ class CategoryNewsController extends Controller
 {
     public function showCategoryList()
     {
-        $categoryNews = app(Category::class);
+/*        $categoryNews = app(Category::class);*/
         return view('news.category',[
-            'categoryList'=>$categoryNews->getCategories()
+            'categoryList'=>Category::all()
         ]);
     }
 
     public function showCategoryNews(int $id)
     {
 
-        $news = app(News::class);
-        $categoryName = app(Category::class);
+/*        $news = app(News::class);
+        $categoryName = app(Category::class);*/
             return view('news.categoryNews', [
-            'categoryNewsList' =>$news->getNewsByCategoryId($id),
-            'categoryName'=>$categoryName->getCategoryById($id)
+            'categoryNewsList' =>Category::find($id)->news,
+            'categoryName'=>Category::find($id)
+
         ]);
     }
 
