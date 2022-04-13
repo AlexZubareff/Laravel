@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Source\CreateRequest;
+use App\Http\Requests\Source\EditRequest;
 use App\Models\Source;
 use Illuminate\Http\Request;
 
@@ -34,27 +36,26 @@ class SourceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CreateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-        public function store(Request $request)
+        public function store(CreateRequest $request)
     {
-        $data = $request->only(['name', 'url', 'description']);
-        $source = Source::create($data);
+        $source = Source::create($request->validated());
         if($source){
             return redirect()->route('admin.sources.index')
-                ->with('success', 'Источник успешно добавлен');
+                ->with('success', __('messages.admin.sources.create.success'));
         }
-        return back()->with('error', 'Не удалось добавить источник');
+        return back()->with('error', __('messages.admin.sources.create.fail'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Source $source
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Source $source)
     {
         //
     }
@@ -75,29 +76,28 @@ class SourceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param EditRequest $request
+     * @param Source $source
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Source $source)
+    public function update(EditRequest $request, Source $source)
     {
-        $status = $source->fill($request->only(['name', 'url', 'description']))
-            ->save();
+        $status = $source->fill($request->validated())->save();
 
         if($status){
             return redirect()->route('admin.sources.index')
-                ->with('success', 'Источник успешно обновлен');
+                ->with('success', __('messages.admin.sources.edit.success'));
         }
-        return back()->with('error', 'Не удалось обновить источник');
+        return back()->with('error', __('messages.admin.sources.edit.fail'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Source $source
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Source $source)
     {
         //
     }

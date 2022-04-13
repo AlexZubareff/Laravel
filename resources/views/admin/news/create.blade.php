@@ -22,12 +22,12 @@
             <br>
             <div class="form-group">
                 <label for="title">Заголовок новости</label>
-                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}">
+                <input type="text" class="form-control @if($errors->has('title')) alert-danger @endif" name="title" id="title" value="{{ old('title') }}">
             </div>
             <br>
             <div class="form-group">
                 <label for="author">Автор новости</label>
-                <input type="text" class="form-control" name="author" id="author" value="{{ old('author') }}">
+                <input type="text" class="form-control @if($errors->has('author')) alert-danger @endif" name="author" id="author" value="{{ old('author') }}">
             </div>
             <br>
             <div class="form-group">
@@ -38,7 +38,7 @@
             <br>
             <div class="form-group">
                 <label for="status">Статус новости</label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-control @if($errors->has('status')) alert-danger @endif" name="status" id="status">
                     <option @if(old('status') === 'DRAFT') selected @endif>DRAFT</option>
                     <option @if(old('status') === 'ACTIVE') selected @endif>ACTIVE</option>
                     <option @if(old('status') === 'BLOCK') selected @endif>BLOCK</option>
@@ -47,7 +47,7 @@
             <br>
             <div class="form-group">
                 <label for="description">Текст новости</label>
-                <textarea type="text" class="form-control" name="description" id="description">{!! old('description') !!}</textarea>
+                <textarea type="text" class="form-control @if($errors->has('description')) alert-danger @endif" name="description" id="description">{!! old('description') !!}</textarea>
             </div>
             <br>
             <button type="submit" class="btn btn-success">Добавить новость</button>
