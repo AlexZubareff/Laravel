@@ -5,7 +5,14 @@
     </button>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" href="#">Редактировать профиль</a>
+        </div>
+    </div>
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
             <a class="nav-link px-3" href="#">Выход</a>
         </div>
     </div>
+
 </header>
+

@@ -4,14 +4,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
-use \App\Http\Controllers\CommentController as UserCommentController;
+use App\Http\Controllers\CommentController as UserCommentController;
 use App\Http\Controllers\Admin\IndexController as AdminController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\SourceController as AdminSourceController;
 use App\Http\Controllers\SourceController as SourceController;
 use App\Http\Controllers\CategoryNewsController;
-use \App\Http\Controllers\Admin\NewsCommentController as AdminNewsCommentController;
+use App\Http\Controllers\Admin\NewsCommentController as AdminNewsCommentController;
+use App\Http\Controllers\Account\IndexController as AccountController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,12 +52,76 @@ Route::post('/news/comment/store', [UserCommentController::class, 'storeComment'
     ->name('userComment.store');
 
 
-// Admin routs
-Route::group(['prefix'=>'admin', 'as'=>'admin.'], function (){
-    Route::get('/', AdminController::class)
+Route::group(['middleware'=> 'auth'], function() {
+    Route::group(['prefix' => 'account', 'as' => 'account'], function () {
+        Route::get('/', AccountController::class)
         ->name('index');
-    Route::resource('categories', AdminCategoryController::class);
-    Route::resource('news', AdminNewsController::class);
-    Route::resource('comments', AdminNewsCommentController::class);
-    Route::resource('sources', AdminSourceController::class);
+        // loguot
+        Route::get('logout', function () {
+           Auth::logout();
+           return redirect()->route('login');
+        })->name('logout');
+    });
+// Admin routs
+    Route::group(['prefix'=>'admin', 'as'=>'admin.', 'middleware'=> 'admin.check'], function (){
+        Route::get('/', AdminController::class)
+            ->name('index');
+        Route::resource('categories', AdminCategoryController::class);
+        Route::resource('news', AdminNewsController::class);
+        Route::resource('comments', AdminNewsCommentController::class);
+        Route::resource('sources', AdminSourceController::class);
+        Route::resource('user', AdminUserController::class);
+    });
+
 });
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
