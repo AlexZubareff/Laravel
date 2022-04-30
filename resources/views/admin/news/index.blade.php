@@ -16,9 +16,11 @@
             <tr>
                 <th>#ID</th>
                 <th>Категория Новости</th>
+                <th>Имя источника</th>
                 <th>Заголовок Новости</th>
                 <th>Статус</th>
                 <th>Описание</th>
+                <th>Ссылка на новость</th>
                 <th>Последнее изменение</th>
                 <th>Коментарии</th>
                 <th>Опции</th>
@@ -29,9 +31,11 @@
                 <tr>
                     <td>{{ $news->id }}</td>
                     <td>{{ $news->category->title }}</td>
+                    <td>{{ $news->source->name }}</td>
                     <td>{{ $news->title }}</td>
                     <td>{{ $news->status }}</td>
                     <td>{{ $news->description }}</td>
+                    <td><a href="{{ $news->news_url }}">{{ $news->news_url }}</a></td>
                     <td>@if($news->updated_at) {{ $news->updated_at->format('d-m-Y H:i') }} @endif</td>
                     <td>
                         <div class="btn-toolbar mb-2 mb-md-0">

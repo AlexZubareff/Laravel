@@ -20,9 +20,10 @@
                 </select>
             </div>
             <br>
+
             <div class="form-group">
                 <label for="title">Заголовок новости</label>
-                <input type="text" class="form-control @if($errors->has('title')) alert-danger @endif" name="title" id="title" value="{{ old('title') }}">
+                <input type="text" class="form-control @if($errors->has('title')) alert-danger @endif" name="title" id="title" value="{{ old('title')  }}">
             </div>
             <br>
             <div class="form-group">

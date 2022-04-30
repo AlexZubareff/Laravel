@@ -5,5 +5,8 @@
         @if(Auth::user()->is_admin)
             <a href="{{ route('admin.index') }}">Войти в админку</a>
         @endif
+        @if(Auth::user()->avatar)
+            <img src="{{Auth::user()->avatar}}" style="width: 250px">
+        @endif
     </div>
 @endsection

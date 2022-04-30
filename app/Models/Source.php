@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Source extends Model
 {
@@ -13,5 +14,11 @@ class Source extends Model
     protected $fillable = [
         'name', 'url', 'description'
     ];
+
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class, 'source_id', 'id');
+    }
+
 
 }

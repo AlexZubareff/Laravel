@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\DB;
 
 class News extends Model
 {
     use HasFactory;
     protected $table = 'news';
     protected $fillable = [
-        'category_id', 'title', 'status', 'author', 'image', 'description', 'news_id'
+        'category_id', 'news_url', 'source_id', 'title', 'status', 'author', 'image', 'description', 'news_id'
     ];
 
     //Relations
@@ -28,27 +27,11 @@ class News extends Model
     {
         return $this->hasMany(Comment::class, 'news_id', 'id');
     }
-/*    public function getNews(): array
-    {
-        return DB::table($this->table)
-            ->get()
-            ->toArray();
-    }
 
-    public function getNewsById(int $id): mixed
+    public function source(): BelongsTo
     {
-        return DB::table($this->table)->find($id);
+        return $this->belongsTo(Source::class);
     }
-
-    public function getNewsByCategoryId(int $id): array
-    {
-        return DB::table($this->table)
-            ->join('categories', 'news.category_id', '=', 'categories.id')
-            ->select('news.*', 'categories.title as categoryTitle')
-            ->where('news.category_id', '=', $id)
-            ->get()
-            ->toArray();
-    }*/
 
 
 }

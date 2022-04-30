@@ -19,6 +19,7 @@
                 <th>URL</th>
                 <th>Описание</th>
                 <th>Последнее изменение</th>
+                <th>Парсер</th>
                 <th>Опции</th>
             </tr>
             </thead>
@@ -30,6 +31,14 @@
                     <td>{{ $source->url }}</td>
                     <td>{{ $source->description }}</td>
                     <td>@if($source->updated_at) {{ $source->updated_at->format('d-m-Y H:i') }} @endif</td>
+                    <td>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <a href="{{ route('admin.parser', [$source]) }}" class="btn btn-sm btn-outline-secondary">Распарсить</a>
+                            </div>
+                        </div>
+                    </td>
+
                     <td>
                         <a href="{{ route('admin.sources.edit', [$source]) }}">Ред.</a>
                         &nbsp;

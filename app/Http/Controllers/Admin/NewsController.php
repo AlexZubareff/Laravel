@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\Parser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\News\CreateRequest;
 use App\Http\Requests\News\EditRequest;
@@ -32,7 +33,7 @@ class NewsController extends Controller
     public function create()
     {
         return view('admin.news.create', [
-            'categories'=>Category::select("id", "title")->get()
+            'categories'=>Category::select("id", "title")->get(),
         ]);
     }
 
