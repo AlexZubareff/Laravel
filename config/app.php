@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +163,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,6 +178,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Orchestra\Parser\XmlServiceProvider::class,
 
     ],
 
@@ -191,7 +194,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
     ])->toArray(),
 
 ];
