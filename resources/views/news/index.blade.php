@@ -12,18 +12,18 @@
     @forelse ($newsList as $news)
         <div class="col">
         <div class="card shadow-sm">
-            <img src="{{$news->image}}">
+            <img src="{{Storage::disk('public')->url($news->image)}}">
 
             <div class="card-body">
                 <strong>
-                    <a href="{{route('news.show', $news)}}">
+                    <a href="{{route('news.show', ['news' => $news])}}">
                         {{$news->title}}
                     </a>
                 </strong>
                 <p class="card-text">{!! $news->description !!}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <a href="{{route('news.show', $news)}}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                        <a href="{{route('news.show', ['news' => $news])}}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
                     </div>
                     <small class="text-muted">Статус: <em>{{ $news->status }}</em></small>
                     <small class="text-muted">Автор: <em>{{ $news->author }}</em></small>
@@ -42,3 +42,5 @@
     <br>
     <div class="container"> {{ $newsList->links() }}</div>
 @endsection
+
+

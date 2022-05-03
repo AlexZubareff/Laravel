@@ -20,4 +20,6 @@ interface Parser
 
     public function saveParseData($dataParse, Source $source):array;
 
+    public function saveData(): void;
+
 }

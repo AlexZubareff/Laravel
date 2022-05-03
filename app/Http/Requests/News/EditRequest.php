@@ -26,7 +26,7 @@ class EditRequest extends FormRequest
     {
         return [
             'category_id'=>['required', 'integer', 'exists:news'],
-            'title'=>['required', 'string', 'min:3', 'max:30'],
+            'title'=>['required', 'string', 'min:3', 'max:255'],
             'status' =>['required', 'string', 'min:5', 'max:7'],
             'author' =>['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg'],

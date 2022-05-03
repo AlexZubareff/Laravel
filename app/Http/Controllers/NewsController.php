@@ -15,7 +15,7 @@ class NewsController extends Controller
     {
 
         return view('news.index', [
-            'newsList' => News::paginate(6)
+            'newsList' => News::paginate(10)
         ]);
     }
 

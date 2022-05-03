@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Contracts\Parser as Contract;
 use App\Models\Source;
+use Illuminate\Support\Facades\Storage;
 use Orchestra\Parser\Xml\Facade as Parser;
 use App\Models\News;
 
@@ -150,5 +151,31 @@ class ParserService implements Contract
 
         }
         return [];
+    }
+
+    public function saveData(): void
+    {
+        $xml = Parser::load($this->url);
+        $data = $xml->parse([
+            'title' => [
+                'uses' =>'channel.title'
+            ],
+            'link' => [
+                'uses' =>'channel.link'
+            ],
+            'image' => [
+                'uses' =>'channel.image.url'
+            ],
+            'description' => [
+                'uses' =>'channel.description'
+            ],
+            'news' => [
+                'uses' =>'channel.item[title,link,guid,description,pubDate]'
+            ],
+        ]);
+        $json = json_encode($data);
+        $e = explode("/", $this->url);
+        $fileName = end($e);
+        Storage::append('news/'.$fileName, $json);
     }
 }

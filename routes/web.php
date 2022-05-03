@@ -66,11 +66,14 @@ Route::group(['middleware'=> 'auth'], function() {
            return redirect()->route('login');
         })->name('logout');
     });
+//    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//        \UniSharp\LaravelFilemanager\Lfm::routes();
+//    });
 // Admin routs
     Route::group(['prefix'=>'admin', 'as'=>'admin.', 'middleware'=> 'admin.check'], function (){
         Route::get('/', AdminController::class)
             ->name('index');
-        Route::get('parser/sources/{source}', AdminParserController::class)
+        Route::get('parser', AdminParserController::class)
             ->name('parser');
 
         Route::resource('categories', AdminCategoryController::class);
